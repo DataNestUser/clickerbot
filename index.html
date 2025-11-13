@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Clicker - Telegram Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Блокировка аккаунта -->
+    <div id="accountBanned" class="banned-overlay hidden">
+        <div class="banned-message">
+            <div class="banned-icon">🚫</div>
+            <h2>Аккаунт заблокирован</h2>
+            <p id="banReason">Нарушение правил использования</p>
+            <p id="banExpires">Блокировка действует до: 01.01.2025</p>
+            <button onclick="contactSupport()">Связаться с поддержкой</button>
+        </div>
+    </div>
+
+    <!-- Заморозка аккаунта -->
+    <div id="accountFrozen" class="frozen-overlay hidden">
+        <div class="frozen-message">
+            <div class="frozen-icon">❄️</div>
+            <h2>Аккаунт заморожен</h2>
+            <p id="freezeReason">Подозрительная активность</p>
+            <p id="freezeExpires">Заморозка действует до: 01.01.2025</p>
+            <p class="frozen-note">Вы можете просматривать прогресс, но не можете совершать действия</p>
+            <button onclick="contactSupport()">Связаться с поддержкой</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Основной экран -->
+        <div id="mainScreen">
+            <div class="header">
+                <div>
+                    <div class="balance">
+                        <span id="coins">0</span> 🪙
+                    </div>
+                    <div class="level-info">
+                        Уровень <span id="level">1</span> • Опыт: <span id="xp">0</span>/<span id="xpNeeded">100</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="xpProgress" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <button id="adminBtn" class="admin-btn">⚙️</button>
+            </div>
+
+            <div class="account-status" id="accountStatus">
+                <!-- Статус аккаунта будет здесь -->
+            </div>
+
+            <div class="click-area">
+                <button id="clickBtn" class="click-button">КЛИКАЙ!</button>
+                <div class="stats">
+                    <div>Сила: <span id="clickPower">1</span></div>
+                    <div>Авто: <span id="autoClickers">0</span></div>
+                    <div>Бустер: <span id="boosterMultiplier">1</span>x</div>
+                </div>
+            </div>
+
+            <div class="menu">
+                <button onclick="showSection('shop')">🛒 Магазин</button>
+                <button onclick="showSection('achievements')">🏆 Достижения</button>
+                <button onclick="showSection('boosters')">🚀 Бустеры</button>
+                <button onclick="showSection('minigames')">🎮 Мини-игры</button>
+                <button onclick="showSection('daily')">📅 Ежедневные</button>
+                <button onclick="showSection('leaderboard')">🏅 Лидеры</button>
+            </div>
+
+            <div class="section">
+                <h3>Активные бустеры</h3>
+                <div id="activeBoosters" class="boosters-grid">
+                    <!-- Активные бустеры будут здесь -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Магазин -->
+        <div id="shop" class="section hidden">
+            <h2>🛒 Магазин улучшений</h2>
+            <div class="shop-items" id="shopItems">
+                <!-- Items will be loaded dynamically -->
+            </div>
+            <button class="back-button" onclick="showSection('main')">← Назад</button>
+        </div>
+
+        <!-- Достижения -->
+        <div id="achievements" class="section hidden">
+            <h2>🏆 Достижения</h2>
+            <div id="achievementsList" class="achievements-grid">
+                <!-- Достижения будут здесь -->
+            </div>
+            <button class="back-button" onclick="showSection('main')">← Назад</button>
+        </div>
+
+        <!-- Бустеры -->
+        <div id="boosters" class="section hidden">
+            <h2>🚀 Бустеры</h2>
+            <div class="boosters-grid" id="boostersGrid">
+                <!-- Boosters will be loaded dynamically -->
+            </div>
+            <button class="back-button" onclick="showSection('main')">← Назад</button>
+        </div>
+
+        <!-- Мини-игры -->
+        <div id="minigames" class="section hidden">
+            <h2>🎮 Мини-игры</h2>
+            <div class="minigames-grid" id="minigamesGrid">
+                <!-- Mini-games will be loaded dynamically -->
+            </div>
+            <button class="back-button" onclick="showSection('main')">← Назад</button>
+        </div>
+
+        <!-- Ежедневные награды -->
+        <div id="daily" class="section hidden">
+            <h2>📅 Ежедневные награды</h2>
+            <p id="dailyStatus">Заберите свою ежедневную награду!</p>
+            <div class="daily-rewards" id="dailyRewards">
+                <!-- Daily rewards will be loaded dynamically -->
+            </div>
+            <button id="claimDaily" class="back-button" onclick="claimDailyReward()">Забрать награду</button>
+            <button class="back-button" onclick="showSection('main')">← Назад</button>
+        </div>
+
+        <!-- Таблица лидеров -->
+        <div id="leaderboard" class="section hidden">
+            <h2>🏅 Таблица лидеров</h2>
+            <div class="leaderboard-list" id="leaderboardList">
+                <!-- Leaderboard will be loaded dynamically -->
+            </div>
+            <button class="back-button" onclick="showSection('main')">← Назад</button>
+        </div>
+
+        <!-- Админ панель -->
+        <div id="adminPanel" class="section hidden">
+            <h2>⚙️ Админ Панель</h2>
+            
+            <div class="admin-section">
+                <h3>Управление аккаунтами</h3>
+                <div class="admin-search">
+                    <input type="number" id="searchUserId" placeholder="ID пользователя">
+                    <button onclick="searchUser()">Найти</button>
+                </div>
+                <div id="userInfo" class="user-info hidden">
+                    <!-- Информация о пользователе -->
+                </div>
+                
+                <div class="admin-controls">
+                    <button onclick="adminBanUser()">Заблокировать аккаунт</button>
+                    <button onclick="adminUnbanUser()">Разблокировать аккаунт</button>
+                    <button onclick="adminFreezeUser()">Заморозить аккаунт</button>
+                    <button onclick="adminUnfreezeUser()">Разморозить аккаунт</button>
+                    <button onclick="adminWarnUser()">Выдать предупреждение</button>
+                </div>
+            </div>
+
+            <div class="admin-section">
+                <h3>Быстрые действия</h3>
+                <div class="admin-controls">
+                    <button onclick="adminAddCoins(1000)">Добавить 1000 монет</button>
+                    <button onclick="adminAddCoins(10000)">Добавить 10000 монет</button>
+                    <button onclick="adminAddXP(1000)">Добавить 1000 опыта</button>
+                    <button onclick="adminUnlockAllAchievements()">Разблокировать все достижения</button>
+                    <button onclick="adminResetProgress()">Сбросить прогресс</button>
+                </div>
+            </div>
+
+            <div class="admin-section">
+                <h3>Статистика сервера</h3>
+                <div id="serverStats">
+                    <!-- Статистика сервера -->
+                </div>
+            </div>
+
+            <button class="back-button" onclick="showSection('main')">Выйти</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

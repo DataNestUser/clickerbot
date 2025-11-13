@@ -1,0 +1,382 @@
+/* Добавляем к предыдущим стилям */
+
+/* Блокировка аккаунта */
+.banned-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banned-message {
+    background: linear-gradient(135deg, #ff6b6b, #c23636);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.banned-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.banned-message h2 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+.banned-message p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.banned-message button {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.banned-message button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Заморозка аккаунта */
+.frozen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.frozen-message {
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.frozen-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.frozen-message h2 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+.frozen-message p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.frozen-note {
+    font-style: italic;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.frozen-message button {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.frozen-message button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Статус аккаунта */
+.account-status {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.account-status.warning {
+    background: rgba(255, 193, 7, 0.2);
+    border: 1px solid #ffc107;
+    color: #ffc107;
+}
+
+.account-status.frozen {
+    background: rgba(33, 150, 243, 0.2);
+    border: 1px solid #2196f3;
+    color: #2196f3;
+}
+
+.account-status.banned {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid #f44336;
+    color: #f44336;
+}
+
+/* Админ панель - дополнения */
+.admin-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.admin-section h3 {
+    margin-bottom: 15px;
+    color: #ffd700;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 8px;
+}
+
+.admin-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.admin-search input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.admin-search input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.user-info {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.user-info h4 {
+    margin-bottom: 10px;
+    color: #ffd700;
+}
+
+.user-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.user-status {
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.user-status.banned {
+    background: rgba(244, 67, 54, 0.3);
+    color: #f44336;
+}
+
+.user-status.frozen {
+    background: rgba(33, 150, 243, 0.3);
+    color: #2196f3;
+}
+
+.user-status.warning {
+    background: rgba(255, 193, 7, 0.3);
+    color: #ffc107;
+}
+
+.user-status.normal {
+    background: rgba(76, 175, 80, 0.3);
+    color: #4caf50;
+}
+
+/* Модификации для заблокированного/замороженного состояния */
+body.banned .click-button,
+body.frozen .click-button {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+body.banned .item,
+body.frozen .item {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+body.banned .booster,
+body.frozen .booster {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+body.banned .minigame,
+body.frozen .minigame {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Уведомления о нарушениях */
+.warning-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #ff9800, #f57c00);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    z-index: 10001;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.warning-notification h3 {
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.warning-count {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Модальное окно для причин */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    max-width: 90%;
+    width: 400px;
+    backdrop-filter: blur(10px);
+}
+
+.modal-content h3 {
+    margin-bottom: 15px;
+    text-align: center;
+    color: #ffd700;
+}
+
+.modal-content textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    margin-bottom: 15px;
+    resize: vertical;
+}
+
+.modal-content select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    margin-bottom: 15px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.modal-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.modal-actions button:first-child {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.modal-actions button:last-child {
+    background: #ff6b6b;
+    color: white;
+}
+
+/* Адаптивность */
+@media (max-width: 400px) {
+    .banned-message,
+    .frozen-message {
+        padding: 20px;
+    }
+    
+    .banned-icon,
+    .frozen-icon {
+        font-size: 60px;
+    }
+    
+    .admin-search {
+        flex-direction: column;
+    }
+    
+    .user-stats {
+        grid-template-columns: 1fr;
+    }
+}
